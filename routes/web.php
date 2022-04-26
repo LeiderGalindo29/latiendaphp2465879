@@ -18,11 +18,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Primera ruta
-// get: mostrar en el navegador
-//parametros: 1. nombre de la ruta
-Route::get('hola', 
-           function(){
-                echo "hola mi primera ruta en php";
-            }
-        );
+//ruta paises
+Route::get('paises' , function(){
+    $paises=["colombia" => [ "capital" => "Bogota","moneda" => "peso", "poblacion" => 10.55, "ciudades"=>"Medellin","cali","Barranquilla"], 
+             "argentina"  => ["capital" => "Buenos Aires","moneda" => "Peso argentino","poblacion" => 45.38, "ciudades"=>"Buenos Aires","Rosario","La Plata"],
+             "venezuela"  => [ "capital" => "Caracas", "moneda" => "Bolivares","poblacion" => 28.44, "ciudades"=>"Valencia","Caracas","Barinas"]];
+
+
+return view('paises')->with("paises" , $paises);
+
+
+
+});
+
+//mostrar vista de paises
+
+
+
