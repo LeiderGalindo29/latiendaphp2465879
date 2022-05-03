@@ -20,9 +20,34 @@ Route::get('/', function () {
 
 //ruta paises
 Route::get('paises' , function(){
-    $paises=["colombia" => [ "capital" => "Bogota","moneda" => "peso", "poblacion" => 10.55, "ciudades"=>"Medellin","cali","Barranquilla"], 
-             "argentina"  => ["capital" => "Buenos Aires","moneda" => "Peso argentino","poblacion" => 45.38, "ciudades"=>"Buenos Aires","Rosario","La Plata"],
-             "venezuela"  => [ "capital" => "Caracas", "moneda" => "Bolivares","poblacion" => 28.44, "ciudades"=>"Valencia","Caracas","Barinas"]];
+    $paises=["colombia" => [    
+                    "capital" => "Bogota",
+                    "moneda" => "peso",
+                    "poblacion" => 10.55,
+                    "ciudades"=>
+                        ["Medellin",
+                        "cali",
+                        "Barranquilla"]
+            ], 
+             "argentina"  => [
+                    "capital" => "Buenos Aires",
+                    "moneda" => "Peso argentino",
+                    "poblacion" => 45.38,
+                     "ciudades"=>[
+                            "Buenos Aires",
+                            "Rosario",
+                            "La Plata"]
+                        ],
+             "venezuela"  => [ 
+                 "capital" => "Caracas",
+                  "moneda" => "Bolivares",
+                  "poblacion" => 28.44, 
+                  "ciudades"=>[ 
+                      "Valencia",
+                      "Caracas",
+                      "Barinas"]
+                    ]
+              ];
 
 
 return view('paises')->with("paises" , $paises);
