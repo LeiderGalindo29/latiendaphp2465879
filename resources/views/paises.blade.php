@@ -8,39 +8,47 @@
     <link rel="stylesheet" href="../css/app.css">
     <title>Document</title>
 </head>
-<body><br><center>
-    <h1>
+<body>
+    <style>
+        body{
+            font-family: 'Akshar', sans-serif;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        
+    </style><br><center>
+    <h1 >
         Paises de la region
     </h1><br>
     </center>
-    <table class="table table-striped">
+    <table id="a" class="table table-striped">
         <thead class="thead-dark">
             <tr>
-                <th> Pais </th>
+                <th class="text-info" > Pais </th>
                 <th> Capital </th>
-                <th> Moneda </th>
+                <th class="text-danger"> Moneda </th>
                 <th> Poblacion </th>
-                <th> Ciudades </th>
+                <th class="text-success"> Ciudades </th>
                 
             </tr>
         </thead>
         <tbody> 
             @foreach($paises as $pais => $infopais)
                 <tr>
-                    <td rowspan="{{ count($infopais['ciudades']) }}" >
+                    <td  rowspan="{{ count($infopais['ciudades']) }}" >
                         {{ $pais }}
                     </td>
-                    <td rowspan="{{ count($infopais['ciudades']) }}" >
+                    <td class="text-success" rowspan="{{ count($infopais['ciudades']) }}" >
                     {{    $infopais["capital"]  }}
                     </td>
-                    <td rowspan="{{ count($infopais['ciudades']) }}">
+                    <td class="text-info" rowspan="{{ count($infopais['ciudades']) }}">
                     {{    $infopais["moneda"]  }}
                     </td>
-                    <td rowspan="{{ count($infopais['ciudades']) }} ">
+                    <td class="text-danger"  rowspan="{{ count($infopais['ciudades']) }} ">
                     {{    $infopais["poblacion"]  }}
                     </td>
                     @foreach($infopais["ciudades"] as $ciudad)
-                    <th>
+                    <th class="bg-success">
                         {{ $ciudad }}
                     </th>
                     </tr>
