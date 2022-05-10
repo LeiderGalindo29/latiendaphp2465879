@@ -56,6 +56,13 @@ return view('paises')->with("paises" , $paises);
 
 });
 
+
+Route::get('prueba', function(){
+return view('productos.new');
+
+
+});
+
 //mostrar vista de paises
 
 
