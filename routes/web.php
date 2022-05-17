@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductoController;
 use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Route;
 
@@ -64,6 +65,10 @@ return view('productos.new');
 });
 
 //mostrar vista de paises
+
+Route::resource('productos',
+                ProductoController::class);
+
 
 
 
