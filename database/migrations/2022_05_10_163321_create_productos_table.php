@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->text('imagen');
             $table->longText('desc');
-            $table->decimal('precio', 8, 2);
+            $table->decimal('precio');
             $table->foreignId('marca_id')->constrained();
             $table->foreignId('categoria_id')->constrained();
             $table->timestamps();
