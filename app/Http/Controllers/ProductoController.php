@@ -8,6 +8,7 @@ use App\Models\Marca;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
+
 class ProductoController extends Controller
 {
     /**
@@ -41,23 +42,26 @@ class ProductoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $r)
+    public function store(Request $r) //recibir los datos del fomulario
     {
 
         //definir reglas de validacion
         $reglas = [
-            "nombre" => 'required|alpha',
+            "nombre" => 'unique:productos,nombre',
             "desc" => 'required|max:50',
             "precio" => 'required|numeric',
             "marca" => 'required',
-            "categoria" => 'required'
+            "categoria" => 'required',
+            "imagen" => 'required|image' 
 
         ];
         //mensajes personalizados por regla
         $mensajes = [
-            "required"=>"Campo obligatorio",
-            "numeric"=>"Solo numeros",
-            "alpha"=>"Solo letras"
+            "required" => "Campo obligatorio",
+            "numeric" => "Solo numeros",
+            "alpha" => "Solo letras",
+            "image" => "Solo se permite imagenes",
+            "unique" => "Nombre del producto ya existe"   
         ];
         //crear objeto validador
         $v = Validator::make($r->all(), $reglas, $mensajes);
@@ -76,6 +80,18 @@ class ProductoController extends Controller
             //var_dump($v->errors());
 
         } else {
+            //asignar variable nombre_archivo 
+            $nombre_archivo = $r->imagen->getClientOriginalName();
+            $archivo = $r->imagen;
+            //analizar el objeto file
+            // var_dump($r->imagen->getClientOriginalName());
+
+            //mover el archivo a la carpeta public
+            //var_dump(public_path());
+            $ruta = public_path().'/img';
+            $archivo->move($ruta, $nombre_archivo);
+            
+
             //Si la Validacion es correcta
             //registra producto
             //crear entidad de producto
@@ -84,6 +100,7 @@ class ProductoController extends Controller
             $p->nombre = $r->nombre;
             $p->desc = $r->desc;
             $p->precio = $r->precio;
+            $p->imagen = $r->imagen;
             $p->marca_id = $r->marca;
             $p->categoria_id = $r->categoria;
 
@@ -93,13 +110,7 @@ class ProductoController extends Controller
             //redireccionar a la ruta create
             return redirect('productos/create')
                 ->with('mensaje', 'Producto registrado');
-
-
-
-            //redireccionar a la ruta create
-            return redirect('productos/create')
-                ->with('mensaje', 'Producto registrado');
-            // echo "producto creado";
+       
         }
     }
 

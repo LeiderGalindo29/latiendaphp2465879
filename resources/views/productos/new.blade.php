@@ -11,8 +11,8 @@
 </div>
 
 <div class="row">
-
-    <form class='col s8' method="POST" action="{{url('productos') }}">
+                                                                      <!--carga de archivo  -->
+    <form class='col s8' method="POST" action="{{url('productos') }}" enctype="multipart/form-data">
         @csrf
 
         <div class="row">
@@ -25,7 +25,7 @@
 
         <div class="row">
             <div class="input-field col s8">
-                <textarea class="materialize-textarea" type="text" id="desc" name="desc" >{{old('desc')}}</textarea>
+                <textarea class="materialize-textarea" type="text" id="desc" name="desc">{{old('desc')}}</textarea>
                 <label for="desc">Descripcion</label>
                 <span>{{ $errors->first('desc')}}</span>
             </div>
@@ -33,7 +33,7 @@
 
         <div class="row">
             <div class="input-field col s8">
-                <input placeholder="Precio del producto" type="text" id="precio" name="precio" value="{{old('precio')}}">   
+                <input placeholder="Precio del producto" type="text" id="precio" name="precio" value="{{old('precio')}}">
                 <label for="precio">Precio</label>
                 <span>{{ $errors->first('precio')}}</span>
             </div>
@@ -56,7 +56,7 @@
         <div class="row">
             <div class="col s8 input-field">
                 <select name="categoria" id="categoria">
-                <option value="">Eliga la categoria</option>
+                    <option value="">Eliga la categoria</option>
                     @foreach($categorias as $categoria)
                     <option value="{{ $categoria->id }}">{{ $categoria->nombre }}</option>
                     @endforeach
@@ -69,12 +69,13 @@
         <div class="row">
             <div class="file-field input-field col s8">
                 <div class="btn">
-                    <span>Cargar</span>
-                    <input type="file">
+                    <span>Imagen del producto</span>
+                    <input type="file" name="imagen">
                 </div>
                 <div class="file-path-wrapper">
                     <input class="file-path validate" type="text">
                 </div>
+                <span>{{ $errors->first('imagen')}}</span>
             </div>
         </div>
         <div class="row">
