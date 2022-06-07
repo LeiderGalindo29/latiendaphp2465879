@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProductoController;
 use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,6 +69,8 @@ return view('productos.new');
 
 Route::resource('productos',
                 ProductoController::class);
+Route::resource('cart',
+                CartController::class,['only' => ['store', 'destroy', 'index']]);
 
 
 
