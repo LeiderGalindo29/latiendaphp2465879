@@ -95,7 +95,7 @@ class ProductoController extends Controller
             // var_dump($r->imagen->getClientOriginalName());
 
             //mover el archivo a la carpeta public
-            //var_dump(public_path());
+            var_dump(public_path());
             $ruta = public_path().'/img';
             $archivo->move($ruta, $nombre_archivo);
             
@@ -108,7 +108,7 @@ class ProductoController extends Controller
             $p->nombre = $r->nombre;
             $p->desc = $r->desc;
             $p->precio = $r->precio;
-            $p->imagen = $r->imagen;
+            $p->imagen = $nombre_archivo;
             $p->marca_id = $r->marca;
             $p->categoria_id = $r->categoria;
 

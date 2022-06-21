@@ -5,9 +5,15 @@
 <div class="row">
     <h1>{{ $producto->nombre }}</h1>
 </div>
-<img src="{{ asset('img/'.$producto->imagen ) }}" alt=""/><br>
 <div class="row">
-<div class="col s3">
+    <div class="col s8">
+    <div class="card-image">
+    @if( $producto->imagen === null)
+                <img src="{{ asset('img/nodispo.png' ) }}" alt="">             
+                @else
+                <img src="{{ asset('img/'.$producto->imagen ) }}" alt="">
+                @endif
+                </div>
     <p> Marca : {{ $producto->marca->nombre}}</p>
     <p> Categoria : {{ $producto->categoria->nombre}}</li>
     <ul>
@@ -16,14 +22,15 @@
         
     </ul>
  </div>     
-<div class="col s1"></div>    <br><br><br><br><br>
+<div class="col s4">   <br><br><br>
     <div class="row">
-        <h3 style="float: right">Añadir al carrito</h3>
+        <h1>Añadir al carrito</h2>
     </div>
-    <div style="float: right; margin-bottom: 100px;"class="row">
         <form action="{{route('cart.store')}}" method="POST">
             @csrf
             <input type="hidden" name="prod_id" value="{{ $producto->id }}">
+            <input type="hidden" name="prod_nom" value="{{ $producto->nombre }}">
+            
             <div class="row">
                 <div  class="col s4 input-field">
                     <select  name="cantidad" id="cantidad">
@@ -33,13 +40,13 @@
                     </select>
                     <label for="cantidad">Cantidad</label>
                 </div>
+                <input type="hidden" name="prod_precio" value="{{ $producto->precio }}">
                 <div>
-                <br><br>
+            <button class="btn waves-effect black" type="submit" name="action">
+                <i class="material-icons right">Añadir</i>
+            </button>
                 </div>
             </div>
-<div class="row">
-            <button class="btn waves-effect black" type="submit" name="action">Añadir
-            </button>
         </form>
     </div>
 </div>
